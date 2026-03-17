@@ -1,0 +1,20 @@
+<h2>Market Data</h2>
+
+<p>Component loaded.</p>
+
+@if (loading) {
+  <p>Loading market data...</p>
+}
+
+@if (error) {
+  <p>{{ error }}</p>
+}
+
+@if (marketData) {
+  <div>
+    <p><strong>Symbol:</strong> {{ marketData.symbol }}</p>
+    <p><strong>Bid:</strong> {{ marketData.bid }}</p>
+    <p><strong>Ask:</strong> {{ marketData.ask }}</p>
+    <p><strong>Last:</strong> {{ marketData.last }}</p>
+  </div>
+}
