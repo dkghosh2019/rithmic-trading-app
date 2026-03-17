@@ -1,0 +1,16 @@
+# Angular
+trading-ui/node_modules/
+trading-ui/.angular/
+trading-ui/dist/
+trading-ui/coverage/
+
+# Python
+trading-backend/venv/
+**/__pycache__/
+*.pyc
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
