@@ -4,19 +4,27 @@ import com.dkghosh.trading.dto.TradeRequest;
 import com.dkghosh.trading.dto.TradeResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import java.time.Duration;
 
 @Component
 public class TradingClient {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final WebClient webClient;
 
-    @Value("${trading.python-backend.base-url}")
-    private String baseUrl;
+    public TradingClient(@Value("${trading.python-backend.base-url}") String baseUrl) {
+        this.webClient = WebClient.builder()
+                .baseUrl(baseUrl)
+                .build();
+    }
 
     public TradeResponse placeTrade(TradeRequest request) {
-        String url = baseUrl + "/trades";
-        System.out.println("Calling FastAPI URL: " + url);
-        return restTemplate.postForObject(url, request, TradeResponse.class);
+        return webClient.post()
+                .uri("/trades")
+                .bodyValue(request)
+                .retrieve()
+                .bodyToMono(TradeResponse.class)
+                .timeout(Duration.ofSeconds(5))
+                .block();
     }
 }

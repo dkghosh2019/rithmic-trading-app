@@ -16,8 +16,10 @@ public class TradeController {
         this.tradeService = tradeService;
     }
 
+
     @PostMapping
     public TradeResponse placeTrade(@Valid @RequestBody TradeRequest request) {
+        System.out.println("Incoming request: " + request);
         return tradeService.executeTrade(request);
     }
 }
