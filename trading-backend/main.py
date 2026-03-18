@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from schemas import TradeRequest
 
 app = FastAPI()
 
@@ -22,4 +23,11 @@ def market_data_test():
         "bid": 7156.75,
         "ask": 7157.00,
         "last": 7157.00
+    }
+
+@app.post("/trades")
+def create_trade(trade: TradeRequest):
+    return {
+        "message": "trade received",
+        "trade": trade.model_dump()
     }
