@@ -1,11 +1,9 @@
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from schemas import TradeCreate
 from services.market_data_service import MarketDataService
 from services.trade_service import TradeService
-from schemas import TradeCreate
-
 
 app = FastAPI()
 
